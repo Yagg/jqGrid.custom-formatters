@@ -27,10 +27,11 @@
                 iCol = $.jgrid.getCellIndex($cell[0]);
                 colModel = p.colModel;
                 var val = $.fn.fmatter[colModel[iCol].formatter].unformat(valueGetter($cell), colModel, $cell);
-                colModel[iCol].formatoptions[callbackName].call($grid[0],
+                return colModel[iCol].formatoptions[callbackName].call($grid[0],
                     val, $row.attr('id'), colModel);
             }
         }
+        return false;
     }
 
     function commonCallbackForText(e, callbackName) {
@@ -92,7 +93,7 @@
             return "<div style='white-space:nowrap;'>"
                 + (!op.mixInHtmlLast ? mixInHtml : "")
                 + '<a ' +
-                (op.onClick ? ' onclick="return $.fn.fmatter.dynamicLink.onClick.call(this, arguments[0]);"' : '') +
+                (op.onClick ? ' onclick="return $.fn.fmatter.extLink.onClick.call(this, arguments[0]);"' : '') +
                 ' href="' + op.url + '"' + attrStr + '>' +
                 (cellValue || '&nbsp;') + '</a>'
                 + (op.mixInHtmlLast ? mixInHtml : "")
